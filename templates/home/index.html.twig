@@ -1,0 +1,23 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Accueil{% endblock %}
+
+{% block body %}
+<div class="container text-center mt-5">
+    <div class="jumbotron">
+        <h1 class="display-4">Bienvenue ! 🎉</h1>
+        
+        {% if app.user %}
+            <p class="lead">Bonjour <strong>{{ app.user.email }}</strong>, vous êtes bien connecté.</p>
+            <hr class="my-4">
+            <a class="btn btn-danger btn-lg" href="{{ path('app_logout') }}" role="button">Se déconnecter</a>
+        {% else %}
+            <p class="lead">Ceci est la page d'accueil.</p>
+            <hr class="my-4">
+            <p>Vous n'êtes pas connecté.</p>
+            <a class="btn btn-primary btn-lg" href="{{ path('app_login') }}" role="button">Se connecter</a>
+            <a class="btn btn-secondary btn-lg" href="{{ path('app_register') }}" role="button">Créer un compte</a>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}
