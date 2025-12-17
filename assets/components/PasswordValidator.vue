@@ -1,12 +1,12 @@
 <template>
   <div class="password-validator-container">
     <div class="mb-3">
-        <label for="plainPassword" class="form-label required">Mot de passe</label>
+        <label :for="inputId" class="form-label" :class="{ required: isRequired }">{{ label }}</label>
         <input 
             type="password" 
-            id="registration_form_plainPassword" 
-            name="registration_form[plainPassword]" 
-            required="required" 
+            :id="inputId" 
+            :name="inputName" 
+            :required="isRequired" 
             class="form-control" 
             v-model="password"
             @input="checkPassword"
@@ -33,6 +33,24 @@
 
 <script>
 export default {
+  props: {
+    inputName: {
+      type: String,
+      required: true
+    },
+    inputId: {
+      type: String,
+      required: true
+    },
+    label: {
+      type: String,
+      default: 'Mot de passe'
+    },
+    isRequired: {
+      type: Boolean,
+      default: true
+    }
+  },
   data() {
     return {
       password: '',

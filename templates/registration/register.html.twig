@@ -19,7 +19,10 @@
                             {{ form_errors(registrationForm.email) }}
                         </div>
 
-                        <div id="password-validator-app"></div>
+                        <div id="password-validator-app"
+                             data-input-name="{{ registrationForm.plainPassword.vars.full_name }}"
+                             data-input-id="{{ registrationForm.plainPassword.vars.id }}">
+                        </div>
                         
                         {{ form_errors(registrationForm.plainPassword) }}
                         {% do registrationForm.plainPassword.setRendered %}
