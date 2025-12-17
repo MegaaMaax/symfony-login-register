@@ -30,16 +30,22 @@ class AppAuthenticator extends AbstractLoginFormAuthenticator
         $email = $formData['email'] ?? '';
         $password = $formData['password'] ?? '';
         $csrfToken = $formData['_csrf_token'] ?? '';
+        $rememberMe = !empty($formData['_remember_me']);
 
         $request->getSession()->set(SecurityRequestAttributes::LAST_USERNAME, $email);
+
+        $badges = [
+            new CsrfTokenBadge('authenticate', $csrfToken),
+        ];
+
+        if ($rememberMe) {
+            $badges[] = (new RememberMeBadge())->enable();
+        }
 
         return new Passport(
             new UserBadge($email),
             new PasswordCredentials($password),
-            [
-                new CsrfTokenBadge('authenticate', $csrfToken),
-                new RememberMeBadge(),
-            ]
+            $badges
         );
     }
 
