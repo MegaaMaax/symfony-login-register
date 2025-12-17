@@ -1,53 +1,62 @@
 # Test Technique - Symfony Login & Register
 
-Ce projet est une application Symfony 7 avec Vue.js 3, réalisée dans le cadre d'un test technique.
-L'objectif est de fournir une page de création de compte et de connexion fonctionnelle, avec une validation dynamique du mot de passe côté client en Vue.js.
+Ce projet est une application web réalisée avec Symfony 7 et Vue.js 3.
+Elle implémente un système complet d'authentification (Inscription, Connexion, Déconnexion) avec une validation de mot de passe dynamique côté client.
 
-## Stack Technique
+## Pre-requis Techniques
 
-*   **Backend**: PHP 8.3 / Symfony 7.4
-*   **Frontend**: Vue.js 3, Bootstrap 5, Webpack Encore
-*   **Base de données**: SQLite (Pour faciliter le setup sans serveur externe)
+Pour faire tourner le projet, vous avez besoin de :
+*   PHP 8.2 ou supérieur (avec extensions sqlite3, intl, pdo)
+*   Composer (Gestionnaire de paquets PHP)
+*   Node.js 18+ & NPM (Pour compiler les assets Vue.js)
+*   Symfony CLI (Optionnel, mais recommandé pour le serveur local)
 
-## Pré-requis
+## Installation & Lancement
 
-Assurez-vous d'avoir installé sur votre machine :
-*   PHP 8.2+
-*   Composer
-*   Node.js & NPM
+Suivez ces étapes dans l'ordre pour démarrer le projet.
 
-## Installation Rapide
+### 1. Cloner et Installer les dépendances
+```bash
+# Installer les dépendances Backend (Symfony)
+composer install
 
-1.  **Installer les dépendances PHP et JS**
-    ```bash
-    composer install
-    npm install
-    ```
+# Installer les dépendances Frontend (Vue.js, Bootstrap)
+npm install
+```
 
-2.  **Préparer la base de données**
-    Le projet utilise SQLite. Le fichier de base de données sera créé dans `var/data.db`.
-    Exécutez cette commande pour créer la structure des tables (Entité User) :
-    ```bash
-    php bin/console doctrine:database:create
-    php bin/console doctrine:schema:update --force
-    ```
+### 2. Base de données (SQLite)
+Le projet est configuré pour utiliser SQLite afin de faciliter le test (aucune configuration serveur requise).
+Le fichier de base de données sera créé automatiquement dans var/data.db.
 
-3.  **Compiler les assets (Vue.js / CSS)**
-    Pour générer les fichiers CSS et JS finaux :
-    ```bash
-    npm run build
-    ```
+```bash
+# Créer la base de données
+php bin/console doctrine:database:create
 
-## Lancer l'application
+# Exécuter les migrations pour créer la table User
+php bin/console doctrine:migrations:migrate
+```
+(Répondez "yes" si on vous demande confirmation)
 
-Vous pouvez utiliser le serveur de développement de Symfony ou le serveur interne de PHP.
+### 3. Compiler les Assets
+Pour générer le CSS (Bootstrap) et le JS (Vue.js) :
 
+```bash
+# Compilation en mode développement
+npm run dev
+```
+
+### 4. Démarrer le Serveur
+Vous pouvez utiliser le serveur web de votre choix.
+
+Option A : Avec Symfony CLI
 ```bash
 symfony server:start
 ```
-Ou
+L'application sera accessible sur http://127.0.0.1:8000
+
+Option B : Avec le serveur interne PHP
 ```bash
 php -S localhost:8000 -t public/
 ```
+Accédez à http://localhost:8000
 
-L'application sera accessible sur [http://localhost:8000](http://localhost:8000).
