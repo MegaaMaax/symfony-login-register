@@ -20,60 +20,13 @@ Elle implémente un système complet d'authentification (Inscription, Connexion,
     *   Modification de la biographie.
     *   Changement de mot de passe sécurisé avec validation dynamique (Vue.js).
 
-## Pre-requis Techniques
+## Lancement via Docker
 
-Pour faire tourner le projet, vous avez besoin de :
-*   PHP 8.2 ou supérieur (avec extensions sqlite3, intl, pdo)
-*   Composer (Gestionnaire de paquets PHP)
-*   Node.js 18+ & NPM (Pour compiler les assets Vue.js)
-*   Symfony CLI (Optionnel, mais recommandé pour le serveur local)
+1. **Démarrer l'application** :
+   ```bash
+   docker compose up -d --build
+   ```
+   L'installation des dépendances, la compilation des assets et la base de données sont gérées automatiquement.
 
-## Installation & Lancement
-
-Suivez ces étapes dans l'ordre pour démarrer le projet.
-
-### 1. Cloner et Installer les dépendances
-```bash
-# Installer les dépendances Backend (Symfony)
-composer install
-
-# Installer les dépendances Frontend (Vue.js, Bootstrap)
-npm install
-```
-
-### 2. Base de données (SQLite)
-Le projet est configuré pour utiliser SQLite afin de faciliter le test (aucune configuration serveur requise).
-Le fichier de base de données sera créé automatiquement dans var/data.db.
-
-```bash
-# Créer la base de données
-php bin/console doctrine:database:create
-
-# Exécuter les migrations pour créer la table User
-php bin/console doctrine:migrations:migrate
-```
-(Répondez "yes" si on vous demande confirmation)
-
-### 3. Compiler les Assets
-Pour générer le CSS (Bootstrap) et le JS (Vue.js) :
-
-```bash
-# Compilation en mode développement
-npm run dev
-```
-
-### 4. Démarrer le Serveur
-Vous pouvez utiliser le serveur web de votre choix.
-
-Option A : Avec Symfony CLI
-```bash
-symfony server:start
-```
-L'application sera accessible sur http://127.0.0.1:8000
-
-Option B : Avec le serveur interne PHP
-```bash
-php -S localhost:8000 -t public/
-```
-Accédez à http://localhost:8000
-
+2. **Accéder au site** :
+   Ouvrez [http://localhost:8000](http://localhost:8000) dans votre navigateur.
