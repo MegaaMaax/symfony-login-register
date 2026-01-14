@@ -25,15 +25,12 @@ class ProfileController extends AbstractController
         EntityManagerInterface $entityManager,
         UserPasswordHasherInterface $passwordHasher
     ): Response {
-        /** @var User $user */
         $user = $this->getUser();
 
         $form = $this->createForm(ProfileFormType::class, $user);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            // 1. Gestion de l'upload Photo
-            /** @var UploadedFile $photoFile */
             $photoFile = $form->get('photo')->getData();
 
             if ($photoFile) {
@@ -47,13 +44,11 @@ class ProfileController extends AbstractController
                         $newFilename
                     );
                 } catch (FileException $e) {
-                    // ... gérer l'exception si besoin
                 }
 
                 $user->setPhoto($newFilename);
             }
 
-            // 2. Gestion du mot de passe
             $newPassword = $form->get('newPassword')->getData();
             if ($newPassword) {
                 $user->setPassword(
